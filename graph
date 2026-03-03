@@ -1,0 +1,28 @@
+class graph {
+    public int maxArea(int[] height) {
+        int maxArea = 0;
+        int left = 0;
+        int right = height.length - 1;
+
+        while (left < right) {
+            // Calculate the width between the two pointers
+            int width = right - left;
+            
+            // The height of the water is limited by the shorter bar
+            int containerHeight = Math.min(height[left], height[right]);
+            
+            // Update maxArea if the current container is larger
+            int currentArea = width * containerHeight;
+            maxArea = Math.max(maxArea, currentArea);
+
+            // Move the pointer pointing to the shorter bar inwards
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+}
