@@ -1,0 +1,35 @@
+import java.util.Stack;
+
+class parenthesis {
+
+    public boolean isValid(String s) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : s.toCharArray()) {
+
+            // Push opening brackets
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            }
+            else {
+
+                // No opening bracket available
+                if (stack.isEmpty())
+                    return false;
+
+                char top = stack.pop();
+
+                // Check matching pairs
+                if ((ch == ')' && top != '(') ||
+                    (ch == '}' && top != '{') ||
+                    (ch == ']' && top != '[')) {
+                    return false;
+                }
+            }
+        }
+
+        // Stack must be empty
+        return stack.isEmpty();
+    }
+}
